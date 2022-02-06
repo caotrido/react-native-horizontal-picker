@@ -37,7 +37,7 @@ export default class HorizontalPicker extends PureComponent<HorizontalPickerProp
   private currentPositionX: number;
   private readonly defaultScrollEventThrottle = 16;
   private readonly defaultDecelerationRate = Platform.OS == "ios" ? 50 : 0.9;
-  private readonly defaultSnapTimeout = 500;
+  private readonly defaultSnapTimeout = 300;
 
   constructor(props: HorizontalPickerProps) {
     super(props);
@@ -113,7 +113,7 @@ export default class HorizontalPicker extends PureComponent<HorizontalPickerProp
     }
   }
 
-  private scrollToPosition = (position: number, animated: boolean = true) => {
+  public scrollToPosition = (position: number, animated: boolean = true) => {
     const { itemWidth, onChange } = this.props;
     const x = position * itemWidth;
     this.ignoreNextScroll = true;
@@ -188,7 +188,7 @@ export default class HorizontalPicker extends PureComponent<HorizontalPickerProp
       >
         {
           data.map((item: any, index: number) => (
-            <TouchableWithoutFeedback onPress={() => this.scrollToPosition(index, false)} key={index}>
+            <TouchableWithoutFeedback onPress={() => this.scrollToPosition(index, true)} key={index}>
               <View>
                 {
                   renderItem(item, index)
